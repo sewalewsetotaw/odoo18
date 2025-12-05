@@ -1,33 +1,32 @@
 [options]
 
 # ---------------------------------------------------------
-# XML-RPC port inside the container (default Odoo port).
-# External port is mapped by docker-compose.
+# Path to your custom and community addons for local Odoo.
+# Absolute Windows path is required.
 # ---------------------------------------------------------
-xmlrpc_port = 8069
+addons_path = C:\odoo_dev\odoo18\addons
 
 # ---------------------------------------------------------
-# Path to addons inside Docker.
-# /mnt/extra-addons is mounted from your local machine.
+# Database connection settings for local PostgreSQL.
 # ---------------------------------------------------------
-addons_path = /mnt/extra-addons
+db_host = localhost
+db_port = 5432
+db_user = odoo18
+db_password = odoo18
 
 # ---------------------------------------------------------
-# Master password for database operations in Odoo.
+# Master password used to manage databases through the UI.
 # ---------------------------------------------------------
 admin_passwd = odoo18
 
 # ---------------------------------------------------------
-# PostgreSQL database connection used in Docker.
-# 'db' refers to the database container name.
+# The port Odoo will listen on.
+# Useful when running multiple Odoo versions locally.
 # ---------------------------------------------------------
-db_host = db
-db_user = odoo
-db_password = odoo
-db_port = 5432
+http_port = 8099
 
 # ---------------------------------------------------------
-# CPU and real-time limits (set high for dev environments).
+# Path to wkhtmltopdf (used for PDF reports).
+# Must point to the executable file on Windows.
 # ---------------------------------------------------------
-limit_time_cpu = 999999999
-limit_time_real = 999999999
+wkhtmltopdf_path = C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe
