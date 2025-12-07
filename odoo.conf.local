@@ -23,7 +23,7 @@ admin_passwd = odoo18
 # The port Odoo will listen on.
 # Useful when running multiple Odoo versions locally.
 # ---------------------------------------------------------
-http_port = 8099
+http_port = 9099
 
 # ---------------------------------------------------------
 # Path to wkhtmltopdf (used for PDF reports).
