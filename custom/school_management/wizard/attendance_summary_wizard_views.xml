@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="attendance_summary_wizard" model="ir.ui.view">
+        <field name="name">Attendance Summary</field>
+        <field name="model">attendance.summary.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Attendance Summary">
+                <sheet>
+                    <group>
+                        <field name="date_from" string="Date From"/>
+                        <field name="date_to" string="Date To"/>
+                        <field name="status" string="Status"/>
+                    </group>
+                      <footer>
+                    <button name="action_print_report" type="object" string="Print PDF" class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <!--action-->
+    <record id="attendance_summary_wizard_action" model="ir.actions.act_window">
+        <field name="name">Attendance Summary</field>
+        <field name="res_model">attendance.summary.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+    <!--menu-->
+    <menuitem id="menu_school_reports" name="Reports" parent="menu_school_management" />
+    <menuitem id="menu_school_attendance_summary" name="Attendance Summary PDF"
+              parent="menu_school_reports" action="attendance_summary_wizard_action"  sequence="2" />
+
+</odoo>

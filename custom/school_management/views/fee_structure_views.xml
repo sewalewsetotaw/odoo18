@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_fees_structure_list" model="ir.ui.view">
+        <field name="name">fees.structure.list.views</field>
+        <field name="model">fees.structure</field>
+        <field name="arch" type="xml">
+            <list string="Fees">
+                <field name="name"/>
+                <field name="code"/>
+                <field name="currency_id" invisible="1"/>
+                <field name="amount" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                <field name="income_account_id"/>
+            </list>
+        </field>
+    </record>
+    <record id="view_fees_structure_form" model="ir.ui.view">
+        <field name="name">fees.structure.form</field>
+        <field name="model">fees.structure</field>
+        <field name="arch" type="xml">
+            <form string="Fees">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="code"/>
+                        <field name="currency_id" invisible="1"/>
+                        <field name="amount" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                        <field name="income_account_id" />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+</odoo>

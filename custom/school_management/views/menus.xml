@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <!-- =======================
+         Actions
+    ======================== -->
+
+    <!-- Students & Parents -->
+    <record id="action_student" model="ir.actions.act_window">
+        <field name="name">Students</field>
+        <field name="res_model">student.management</field>
+        <field name="view_mode">kanban,list,form</field>
+        <field name="type">ir.actions.act_window</field>
+    </record>
+
+    <record id="action_parent" model="ir.actions.act_window">
+        <field name="name">Parents</field>
+        <field name="res_model">parent.management</field>
+        <field name="view_mode">list,form</field>
+        <field name="type">ir.actions.act_window</field>
+    </record>
+
+    <!-- Teachers & Attendance -->
+    <record id="action_teacher" model="ir.actions.act_window">
+        <field name="name">Teachers</field>
+        <field name="res_model">hr.employee</field>
+        <field name="view_mode">kanban,list,form</field>
+        <field name="type">ir.actions.act_window</field>
+    </record>
+
+    <record id="action_attendance" model="ir.actions.act_window">
+        <field name="name">Attendance</field>
+        <field name="res_model">attendance.management</field>
+        <field name="view_mode">list,form,graph</field>
+        <field name="type">ir.actions.act_window</field>
+    </record>
+
+    <!-- Academic -->
+    <record id="action_course" model="ir.actions.act_window">
+        <field name="name">Courses</field>
+        <field name="res_model">course.management</field>
+        <field name="view_mode">list,form</field>
+        <field name="type">ir.actions.act_window</field>
+    </record>
+
+    <record id="action_section" model="ir.actions.act_window">
+        <field name="name">Sections</field>
+        <field name="res_model">section.management</field>
+        <field name="view_mode">list,form</field>
+        <field name="type">ir.actions.act_window</field>
+    </record>
+
+    <record id="action_timetable" model="ir.actions.act_window">
+        <field name="name">Timetables</field>
+        <field name="res_model">timetable.management</field>
+        <field name="view_mode">list,form</field>
+        <field name="type">ir.actions.act_window</field>
+    </record>
+
+    <!-- Finance -->
+    <record id="action_fee" model="ir.actions.act_window">
+        <field name="name">Fees</field>
+        <field name="res_model">fees.fees</field>
+        <field name="view_mode">list,form</field>
+        <field name="type">ir.actions.act_window</field>
+    </record>
+
+    <record id="action_fees_structure" model="ir.actions.act_window">
+        <field name="name">Fee Structure</field>
+        <field name="res_model">fees.structure</field>
+        <field name="view_mode">list,form</field>
+        <field name="type">ir.actions.act_window</field>
+    </record>
+
+    <!-- Exams & Results -->
+    <record id="action_exam" model="ir.actions.act_window">
+        <field name="name">Exams</field>
+        <field name="res_model">exam.management</field>
+        <field name="view_mode">list,form</field>
+        <field name="type">ir.actions.act_window</field>
+    </record>
+
+    <record id="action_result" model="ir.actions.act_window">
+        <field name="name">Results</field>
+        <field name="res_model">result.management</field>
+        <field name="view_mode">list,form</field>
+        <field name="type">ir.actions.act_window</field>
+    </record>
+
+    <record id="action_academic_year" model="ir.actions.act_window">
+        <field name="name">Academic Year</field>
+        <field name="res_model">academic.year</field>
+        <field name="view_mode">list,form</field>
+        <field name="type">ir.actions.act_window</field>
+    </record>
+
+    <!-- =======================
+         Menus
+    ======================== -->
+
+    <!-- Top Level -->
+    <menuitem id="menu_school_management" name="School Management" sequence="1"/>
+
+    <!-- Students & Parents -->
+    <menuitem id="menu_student_parent" name="Students - Parents" parent="menu_school_management" sequence="2"/>
+    <menuitem id="menu_student_management" name="Students" parent="menu_student_parent" action="action_student" sequence="1"/>
+    <menuitem id="menu_parent_management" name="Parents" parent="menu_student_parent" action="action_parent" sequence="2"/>
+
+     <!-- Teachers & Attendance -->
+    <menuitem id="menu_staff_attendance" name="Teachers - Attendance" parent="menu_school_management" sequence="3"/>
+    <menuitem id="menu_teacher_management" name="Teachers" parent="menu_staff_attendance" action="action_teacher" sequence="1"/>
+    <menuitem id="menu_attendance_management" name="Attendance" parent="menu_staff_attendance" action="action_attendance" sequence="2"/>
+    <!-- Academic -->
+    <menuitem id="menu_academic" name="Academic" parent="menu_school_management" sequence="4"/>
+    <menuitem id="menu_course_management" name="Courses" parent="menu_academic" action="action_course" sequence="1"/>
+    <menuitem id="menu_section_management" name="Sections" parent="menu_academic" action="action_section" sequence="2"/>
+    <menuitem id="menu_timetable_management" name="Timetables" parent="menu_academic" action="action_timetable" sequence="3"/>
+
+    <!-- Exams & Results -->
+    <menuitem id="menu_exam_management" name="Exams Results" parent="menu_school_management" sequence="5"/>
+    <menuitem id="menu_exam_list" name="Exams" parent="menu_exam_management" action="action_exam" sequence="1"/>
+    <menuitem id="menu_result_list" name="Results" parent="menu_exam_management" action="action_result" sequence="2"/>
+
+     <!-- Fee -->
+    <menuitem id="menu_fee_management" name="Fees" parent="menu_school_management" action="action_fee" sequence="6" groups="school_management.group_school_accountant" />
+
+    <!-- Configuration -->
+    <menuitem id="menu_configuration" name="Configuration" parent="menu_school_management" sequence="100"/>
+    <menuitem id="menu_academic_year_config" name="Academic Year" parent="menu_configuration" action="action_academic_year" sequence="1"/>
+    <menuitem id="menu_fee_structure_config" name="Fee Structure" parent="menu_configuration" action="action_fees_structure" sequence="2"/>
+
+</odoo>

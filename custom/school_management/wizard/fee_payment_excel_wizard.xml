@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="fee_payment_wizard" model="ir.ui.view">
+        <field name="name">Fee Payment</field>
+        <field name="model">fee.payment.report.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Fee Payment">
+                <sheet>
+                    <group>
+                        <field name="date_from" string="Date From"/>
+                        <field name="date_to" string="Date To"/>
+                        <field name="state" string="Status"/>
+                    </group>
+                      <footer>
+                    <button name="generate_fee_payment_excel_report" type="object" string="Export Excel" class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <!--action-->
+    <record id="fee_payment_wizard_action" model="ir.actions.act_window">
+        <field name="name">Fee Payment</field>
+        <field name="res_model">fee.payment.report.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+    <!--menu item-->
+    <menuitem id="menu_fee_payment_excel" name="Fees Payment Excel"
+              parent="menu_school_reports" action="fee_payment_wizard_action"  sequence="2" />
+
+</odoo>

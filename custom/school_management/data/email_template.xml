@@ -1,0 +1,16 @@
+<odoo>
+    <data>
+        <record id="email_template_attendance_absent" model="mail.template">
+            <field name="name">Absent Alert Email</field>
+            <field name="model_id" ref="model_attendance_management"/>
+            <field name="email_from">${(user.email or '')|safe}</field>
+            <field name="subject">Attendance Alert: ${object.student_id.name}</field>
+            <field name="body_html"><![CDATA[
+                <p>Dear Parent,</p>
+                <p>Your child <strong>${object.student_id.name}</strong> (Admission No: ${object.student_id.admission_no})
+                has been absent for the last 3 days in section ${object.section_id.name}.</p>
+                <p>Date: ${object.date}</p>
+            ]]></field>
+        </record>
+    </data>
+</odoo>

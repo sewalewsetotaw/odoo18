@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_fee_list" model="ir.ui.view">
+        <field name="name">fee.list.views</field>
+        <field name="model">fees.fees</field>
+        <field name="arch" type="xml">
+            <list string="Fees">
+                <field name="payment_reference"/>
+                <field name="student_id"/>
+                <field name="fee_structure_id"/>
+                <!--                <field name="currency_id" invisible="1"/>-->
+                <field name="total_amount" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                <field name="amount_paid" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                <field name="amount_remaining" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                <field name="state" widget="badge"
+                       decoration-success="state == 'paid'"
+                       decoration-warning="state == 'partially_paid'"
+                       decoration-danger="state == 'unpaid'"
+                       decoration-muted="state == 'draft'"/>
+                <field name="payment_date"/>
+                <field name="payment_method"/>
+                <field name="reference_number"/>
+                <!--                <field name="company_id"/>-->
+            </list>
+        </field>
+    </record>
+
+    <record id="view_fee_form" model="ir.ui.view">
+        <field name="name">fees.fees.form</field>
+        <field name="model">fees.fees</field>
+        <field name="arch" type="xml">
+            <form string="Fees">
+                <sheet>
+                    <div name="button_box" class="oe_button_box">
+                        <button name="action_view_invoice"
+                                class="btn-primary"
+                                icon="fa-file-invoice"
+                                type="object"
+                                help="View Invoice">
+                            <field name="invoice_id" string="Invoice" widget="statinfo"/>
+                        </button>
+                    </div>
+                    <header>
+                        <button name="action_create_invoice" type="object"
+                                string="Generate Invoice"
+                                class="btn-primary"
+                                groups="account.group_account_invoice" invisible="invoice_id!=False"/>
+
+                        <field name="state" widget="statusbar" options="{'clickable': false}"/>
+                        <!--                        <button name="action_set_paid" type="object" string="Mark as Paid"-->
+                        <!--                                class="btn-primary" groups="school_management.group_school_accountant"/>-->
+                        <!--                        <button name="action_set_paid" type="object" string="Mark as Paid"-->
+                        <!--                                class="btn-primary" />-->
+                        <!--                        <button name="action_set_partial" type="object" string="Mark as Partially Paid"-->
+                        <!--                                class="btn-secondary"/>-->
+                        <!--                        <button name="action_set_unpaid" type="object" string="Mark as Unpaid"-->
+                        <!--                                class="btn-danger"/>-->
+                        <!--                        <button name="action_reset_draft" type="object" string="Reset to Draft"-->
+                        <!--                                class="btn-light"/>-->
+                    </header>
+
+                    <group>
+                        <group>
+                            <field name="payment_reference" readonly="1"/>
+                            <field name="student_id" readonly="state in 'paid'"/>
+                            <field name="fee_structure_id" readonly="state in 'paid'"/>
+                            <field name="payment_date" readonly="state in 'paid'"/>
+                            <field name="payment_method" readonly="state in 'paid'"/>
+                            <field name="reference_number" readonly="state in 'paid'"/>
+                        </group>
+                        <group>
+                            <field name="currency_id" invisible="1"/>
+                            <field name="total_amount" widget="monetary" options="{'currency_field': 'currency_id'}"
+                                   readonly='1'/>
+                            <field name="amount_paid" widget="monetary" options="{'currency_field': 'currency_id'}"
+                                   readonly="state in 'paid'"/>
+                            <field name="amount_remaining" readonly="1" widget="monetary"
+                                   options="{'currency_field': 'currency_id'}"/>
+                        </group>
+                        <group>
+                            <field name="has_discount"/>
+                            <field name="discount_percent" invisible="has_discount!=True"/>
+                            <field name="discounted_amount" widget="monetary"
+                                   options="{'currency_field': 'currency_id'}" invisible="has_discount!=True"/>
+                        </group>
+                        <group>
+                            <field name="has_scholarship"/>
+                            <field name="half_scholarship" invisible="has_scholarship!=True"/>
+                            <field name="full_scholarship" invisible="has_scholarship!=True"/>
+                        </group>
+                        <!--                        <group>-->
+                        <!--                            <field name="company_id"/>-->
+                        <!--                        </group>-->
+                    </group>
+
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+</odoo>

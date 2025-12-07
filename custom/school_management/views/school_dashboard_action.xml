@@ -1,0 +1,15 @@
+<odoo>
+    <!-- Client Action -->
+    <record id="school_dashboard_action" model="ir.actions.client">
+        <field name="name">School Dashboard</field>
+        <field name="tag">school_dashboard_tag</field>
+    </record>
+
+    <!-- Menu Item -->
+    <menuitem id="school_dashboard_menu"
+              name="Dashboard"
+              parent="menu_school_management"
+              action="school_dashboard_action"
+              sequence="1"
+              groups="school_management.group_school_administrator"/>
+</odoo>

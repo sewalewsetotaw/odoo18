@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="module_category_school" model="ir.module.category">
+        <field name="name">School Management</field>
+        <field name="sequence">10</field>
+        <field name="visible">1</field>
+    </record>
+    <!--  User Groups  -->
+    <!-- Administrator Group -->
+    <record id="group_school_administrator" model="res.groups">
+        <field name="name">School Administrator</field>
+        <field name="category_id" ref="school_management.module_category_school"/>
+    </record>
+    <!-- Teacher Group -->
+    <record id="group_school_teacher" model="res.groups">
+        <field name="name">School Teacher</field>
+        <field name="category_id" ref="school_management.module_category_school"/>
+    </record>
+    <!-- Accountant Group -->
+    <record id="group_school_accountant" model="res.groups">
+        <field name="name">School Accountant</field>
+        <field name="category_id" ref="school_management.module_category_school"/>
+    </record>
+    <!-- Guardian Group -->
+    <record id="group_school_guardian" model="res.groups">
+        <field name="name">School Guardian</field>
+        <field name="category_id" ref="school_management.module_category_school"/>
+    </record>
+        <!-- Student Group -->
+    <record id="group_school_student" model="res.groups">
+        <field name="name">School Student</field>
+        <field name="category_id" ref="school_management.module_category_school"/>
+    </record>
+</odoo>

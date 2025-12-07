@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <!-- List View -->
+    <record id="view_student_list" model="ir.ui.view">
+        <field name="name">student.list.views</field>
+        <field name="model">student.management</field>
+        <field name="arch" type="xml">
+            <list string="Students">
+                <field name="name"/>
+                <field name="admission_no"/>
+                <field name="date_of_birth"/>
+                <field name="age"/>
+                <field name="gender"/>
+                <field name="photo"/>
+                <field name="parent_ids"/>
+                <field name="join_date"/>
+                <field name="course_id"/>
+                <field name="section_id"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Form View -->
+    <record id="view_student_form" model="ir.ui.view">
+        <field name="name">student.form.views</field>
+        <field name="model">student.management</field>
+        <field name="arch" type="xml">
+            <form string="Student">
+                <sheet>
+                    <div name="button_box" class="oe_button_box">
+                        <button name="action_view_fees"
+                                class="oe_stat_button"
+                                icon="fa-money"
+                                type="object"
+                                help="View related Fees">
+                            <div class="o_field_widget o_stat_info">
+                                <span class="o_stat_value">
+                                    <field name="fees_count"/>
+                                </span>
+                                <span class="o_stat_text">Fees</span>
+                            </div>
+                        </button>
+                    </div>
+                    <header>
+                        <button name="action_enroll_student"
+                                type="object"
+                                string="Enroll"
+                                class="btn-primary"/>
+                    </header>
+                    <group>
+                        <group>
+                            <field name="fee_ids" invisible="1"/>
+                            <field name="name"/>
+                            <field name="admission_no" readonly="1"/>
+                            <field name="date_of_birth"/>
+                            <field name="age"/>
+                            <field name="gender"/>
+                            <field name="join_date"/>
+                            <field name="section_id"/>
+                            <field name="user_id"/>
+                        </group>
+                        <group string="Media">
+                            <field name="photo" widget="image" class="oe_avatar"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Address Detail">
+
+                        </page>
+                        <page string="Contact Detail">
+                        </page>
+                        <page string="Parent/Guardian">
+                            <field name="parent_ids"/>
+                        </page>
+                        <page string="Course Details">
+                            <field name="course_id"/>
+                        </page>
+                        <page string="Schedule Details">
+                            <field name="timetable_ids"/>
+                        </page>
+                        <page string="Attendance Details">
+                            <field name="attendance_ids"/>
+                        </page>
+
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="view_student_kanban" model="ir.ui.view">
+        <field name="name">student.management.kanban</field>
+        <field name="model">student.management</field>
+        <field name="arch" type="xml">
+            <kanban class="o_hr_employee_kanban" sample="1">
+                <field name="photo"/>
+                <field name="name"/>
+                <field name="admission_no"/>
+                <field name="date_of_birth"/>
+                <field name="age"/>
+                <field name="gender"/>
+                <field name="join_date"/>
+                <templates>
+                    <t t-name="card" class="flex-row">
+                        <!-- Aside for student photo -->
+                        <aside class="o_kanban_aside_full">
+                            <t t-if="record.photo.raw_value">
+                                <field name="photo" widget="background_image"
+                                       options="{'zoom': true, 'zoom_delay': 1000, 'preview_image':'photo'}"
+                                       class="d-block position-relative"/>
+                            </t>
+                            <div t-else="" class="d-flex align-items-center justify-content-center bg-100 bg-gradient">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-75 h-75 opacity-50"
+                                     viewBox="0 0 20 20">
+                                    <g fill="currentColor">
+                                        <path d="M 10 11 C 4.08 11 2 14 2 16 L 2 19 L 18 19 L 18 16 C 18 14 15.92 11 10 11 Z"/>
+                                        <circle cx="10" cy="5.5" r="4.5"/>
+                                    </g>
+                                </svg>
+                            </div>
+                        </aside>
+
+                        <!-- Main content -->
+                        <main class="ms-2">
+                            <div>
+                                <field class="fw-bold fs-5" name="name" placeholder="Student Name"/>
+                            </div>
+
+                            <!-- Admission No -->
+                            <div>
+                                <i class="fa fa-id-card me-2 text-primary"/>
+                                Admission No:
+                                <field name="admission_no"/>
+                            </div>
+
+                            <!-- Section -->
+                            <div t-if="record.section_id.raw_value">
+                                <i class="fa fa-users me-2 text-primary"/>
+                                Section:
+                                <field name="section_id"/>
+                            </div>
+
+
+                            <!-- Date of Birth -->
+                            <div t-if="record.date_of_birth.raw_value">
+                                <i class="fa fa-calendar me-2 text-primary"/>
+                                DOB:
+                                <field name="date_of_birth"/>
+                            </div>
+
+                            <!-- Age -->
+                            <div t-if="record.age.raw_value">
+                                <i class="fa fa-child me-2 text-primary"/>
+                                Age:
+                                <field name="age"/>
+                            </div>
+
+                            <!-- Gender -->
+                            <div t-if="record.gender.raw_value">
+                                <i class="fa fa-venus-mars me-2 text-primary"/>
+                                Gender:
+                                <field name="gender"/>
+                            </div>
+
+                            <!-- Join Date -->
+                            <div t-if="record.join_date.raw_value">
+                                <i class="fa fa-calendar-check me-2 text-primary"/>
+                                Joined:
+                                <field name="join_date"/>
+                            </div>
+                        </main>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <record id="view_student_search" model="ir.ui.view">
+        <field name="name">student.search.views</field>
+        <field name="model">student.management</field>
+        <field name="arch" type="xml">
+            <search string="Search Students">
+                <!-- Basic Search Fields -->
+                <field name="name" string="Student Name"/>
+                <field name="admission_no"/>
+                <field name="section_id"/>
+                <field name="course_id"/>
+                <field name="gender"/>
+
+                <!-- Predefined Filters -->
+                <filter string="Male" name="male" domain="[('gender','=','male')]"/>
+                <filter string="Female" name="female" domain="[('gender','=','female')]"/>
+                <filter string="Other" name="other" domain="[('gender','=','other')]"/>
+
+                <!-- Group By Options -->
+                <group expand="0" string="Group By">
+                    <filter string="Section" name="group_by_section" context="{'group_by':'section_id'}"/>
+                    <filter string="Course" name="group_by_course" context="{'group_by':'course_id'}"/>
+                    <filter string="Gender" name="group_by_gender" context="{'group_by':'gender'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+</odoo>

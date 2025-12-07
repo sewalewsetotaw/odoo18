@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <!-- Report Action -->
+
+    <record id="action_attendance_summary_report" model="ir.actions.report">
+        <field name="name">Attendance Summary Report</field>
+        <field name="model">attendance.management</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">school_management.attendance_summary_template</field>
+        <field name="report_file">school_management.attendance_summary_template</field>
+        <field name="print_report_name">'Attendance Summary Report'</field>
+
+    </record>
+    <!-- Report Template -->
+
+    <template id="attendance_summary_template">
+        <t t-name="school_management.attendance_summary_template">
+                        <t t-set="company" t-value="docs[0].company_id if docs and docs[0].company_id else env.company"/>
+            <t t-set="company" t-value="env.company"/>
+            <html>
+                <body>
+                    <!-- Header -->
+
+                    <div class="header">
+                        <img t-if="company.logo" class="o_company_logo_small" t-att-src="image_data_uri(company.logo)"
+                             alt="Logo"/>
+                        <h1 t-esc="company.name" style="font-size:24px;"/>
+                        <p t-esc="company.city or ''" style="font-size:14px;"/>
+                        <p t-esc="company.phone or ''" style="font-size:14px;"/>
+                        <p t-esc="company.email or ''" style="font-size:14px;"/>
+                    </div>
+                    <!-- Title -->
+
+                    <main>
+                        <h2 style="text-align:center;">Attendance Summary Report</h2>
+
+                        <!-- Attendance Table -->
+
+                        <table style="width:100%; border-collapse: collapse;" border="1">
+                            <thead>
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Section</th>
+                                    <th>Student</th>
+                                    <th>Status</th>
+                                    <th>Teacher</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <t t-if="docs and len(docs) > 0">
+                                    <t t-foreach="docs" t-as="attendance">
+                                        <tr>
+                                            <td>
+                                                <t t-esc="attendance.date or ''"/>
+                                            </td>
+                                            <td>
+                                                <t t-esc="attendance.section_id.name or ''"/>
+                                            </td>
+                                            <td>
+                                                <t t-esc="attendance.student_id.name or ''"/>
+                                            </td>
+                                            <td>
+                                                <t t-esc="attendance.status or ''"/>
+                                            </td>
+                                            <td>
+                                                <t t-esc="attendance.teacher_id.name  or ''"/>
+                                            </td>
+                                        </tr>
+                                    </t>
+                                </t>
+                                <t t-else="">
+                                    <tr>
+                                        <td colspan="8" style="text-align:center;">
+                                            No attendance records found.
+                                        </td>
+                                    </tr>
+                                </t>
+                            </tbody>
+                        </table>
+                    </main>
+                </body>
+            </html>
+        </t>
+    </template>
+
+
+</odoo>

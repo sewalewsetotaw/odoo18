@@ -1,0 +1,24 @@
+<odoo>
+    <!-- Student: Only their own record -->
+    <record id="rule_student_see_self" model="ir.rule">
+        <field name="name">Student: See Own Record</field>
+        <field name="model_id" ref="model_student_management"/>
+        <field name="groups" eval="[(4, ref('school_management.group_school_student'))]"/>
+        <field name="domain_force">[('parent_ids.user_id', '=', user.id)]</field>
+    </record>
+
+    <!-- Guardian: Only see children -->
+    <record id="rule_guardian_see_children" model="ir.rule">
+        <field name="name">Guardian: See Children</field>
+        <field name="model_id" ref="model_student_management"/>
+        <field name="groups" eval="[(4, ref('school_management.group_school_guardian'))]"/>
+        <field name="domain_force">[('parent_ids.user_id', '=', user.id)]</field>
+    </record>
+
+    <record id="rule_teacher_see_own_timetable" model="ir.rule">
+        <field name="name">Teacher: Own Timetable</field>
+        <field name="model_id" ref="model_timetable_management"/>
+        <field name="groups" eval="[(4, ref('school_management.group_school_teacher'))]"/>
+        <field name="domain_force">[('teacher_id.user_id','=', user.id)]</field>
+    </record>
+</odoo>

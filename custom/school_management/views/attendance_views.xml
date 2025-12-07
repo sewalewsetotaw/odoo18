@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <!-- List View -->
+    <record id="view_attendance_list" model="ir.ui.view">
+        <field name="name">Attendance List</field>
+        <field name="model">attendance.management</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="date" string="Date"/>
+                <field name="section_id" string="Section"/>
+                <field name="student_id" string="Student"/>
+                <field name="status" string="Status"/>
+                <field name="teacher_id" string="Teacher"/>
+            </list>
+        </field>
+    </record>
+    <!-- Form View -->
+    <record id="view_attendance_form" model="ir.ui.view">
+        <field name="name">Attendance Form</field>
+        <field name="model">attendance.management</field>
+        <field name="arch" type="xml">
+            <form string="Attendance">
+                <sheet>
+                    <group>
+                        <field name="date" string="Date"/>
+                        <field name="section_id" string="Section"/>
+                        <field name="student_id" string="Student"/>
+                        <field name="status" string="Status"/>
+                        <field name="teacher_id" string="Teacher"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <!-- Search View -->
+    <record id="view_attendance_search" model="ir.ui.view">
+        <field name="name">Attendance Search</field>
+        <field name="model">attendance.management</field>
+        <field name="arch" type="xml">
+            <search string="Search Attendance">
+                <field name="student_id" string="Student"/>
+                <field name="teacher_id" string="Teacher"/>
+                <field name="section_id" string="Section"/>
+
+                <!-- Predefined Filters -->
+                <filter string="Present" name="present" domain="[('status','=','present')]"/>
+                <filter string="Absent" name="absent" domain="[('status','=','absent')]"/>
+                <filter string="Late" name="late" domain="[('status','=','late')]"/>
+                <filter string="Excused" name="excused" domain="[('status','=','excused')]"/>
+                <!-- Group By Options -->
+                <group expand="0" string="Group By">
+                    <filter string="Student" name="group_by_student" context="{'group_by':'student_id'}"/>
+                    <filter string="Section" name="group_by_section" context="{'group_by':'section_id'}"/>
+                    <filter string="Teacher" name="group_by_teacher" context="{'group_by':'teacher_id'}"/>
+                    <filter string="Status" name="group_by_status" context="{'group_by':'status'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+    <record id="view_attendance_graph" model="ir.ui.view">
+        <field name="name">attendance.management.graph</field>
+        <field name="model">attendance.management</field>
+        <field name="arch" type="xml">
+            <graph string="Attendance by Status" type="bar">
+                <!-- X-axis: date -->
+                <field name="date" type="row"/>
+                <!-- Bars colored by status -->
+                <field name="status" type="col"/>
+                <!-- Count of records -->
+                <field name="id" type="measure"/>
+            </graph>
+        </field>
+    </record>
+
+</odoo>

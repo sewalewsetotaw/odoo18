@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- List View -->
+    <record id="view_parent_list" model="ir.ui.view">
+        <field name="name">parent.list.views</field>
+        <field name="model">parent.management</field>
+        <field name="arch" type="xml">
+            <list string="Parents">
+                <field name="name"/>
+                <field name="phone_number"/>
+                <field name="email"/>
+                <field name="relation"/>
+<!--                <field name="students"/>-->
+                <field name="partner_id"/>
+            </list>
+        </field>
+    </record>
+    <!-- Form View -->
+    <record id="view_parent_form" model="ir.ui.view">
+        <field name="name">parent.form.views</field>
+        <field name="model">parent.management</field>
+        <field name="arch" type="xml">
+            <form string="Parent">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="phone_number"/>
+                        <field name="email"/>
+                        <field name="user_id"/>
+                        <field name="relation"/>
+                        <field name="partner_id"/>
+                    </group>
+                    <notebook>
+                        <page string="Address Detail">
+
+                        </page>
+                        <page string="Contact Detail">
+                        </page>
+<!--                        <page string="Children">-->
+<!--                            <field name="students"/>-->
+<!--                        </page>-->
+
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+</odoo>

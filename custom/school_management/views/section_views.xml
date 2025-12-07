@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <!-- List View -->
+    <record id="view_section_list" model="ir.ui.view">
+        <field name="name">section.list.views</field>
+        <field name="model">section.management</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="academic_year_id"/>
+                <field name="course_ids"/>
+                <field name="student_ids"/>
+                <field name="timetable_ids"/>
+            </list>
+        </field>
+    </record>
+    <!-- Form View -->
+    <record id="view_section_form" model="ir.ui.view">
+        <field name="name">section.form.views</field>
+        <field name="model">section.management</field>
+        <field name="arch" type="xml">
+            <form string="Section">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="academic_year_id"/>
+                    </group>
+                    <notebook>
+                        <page string="Courses">
+                            <field name="course_ids"/>
+                        </page>
+                        <page string="Students">
+                            <field name="student_ids"/>
+                        </page>
+                        <page string="Teachers">
+                                <field name="teacher_ids"/>
+                        </page>
+                        <page string="Class Schedule">
+                            <field name="timetable_ids"/>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+</odoo>

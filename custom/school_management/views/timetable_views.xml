@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <!--    list view-->
+    <record id="view_timetable_list" model="ir.ui.view">
+        <field name="name">Timetable List</field>
+        <field name="model">timetable.management</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="section_id" string="Section"/>
+                <field name="course_id" string="Course"/>
+                <field name="teacher_id" string="Teacher"/>
+                <field name="day_of_week" string="Day of Week"/>
+                <field name="start_time" string="Start Time"/>
+                <field name="end_time" string="End Time"/>
+            </list>
+        </field>
+    </record>
+    <!--    form view-->
+    <record id="view_timetable_form" model="ir.ui.view">
+        <field name="name">Timetable Form</field>
+        <field name="model">timetable.management</field>
+        <field name="arch" type="xml">
+            <form string="Timetable">
+                <sheet>
+                    <group>
+                        <field name="section_id" string="Section"/>
+                        <field name="course_id" string="Course"/>
+                        <field name="teacher_id" string="Teacher"/>
+                        <field name="day_of_week" string="Day of Week"/>
+                        <field name="start_time" string="Start Time"/>
+                        <field name="end_time" string="End Time"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+</odoo>
