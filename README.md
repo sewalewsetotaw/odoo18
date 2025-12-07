@@ -12,26 +12,82 @@ The main Odoo Apps include an [Open Source CRM](https://www.odoo.com/page/crm),
 [eCommerce](https://www.odoo.com/app/ecommerce),
 [Warehouse Management](https://www.odoo.com/app/inventory),
 [Project Management](https://www.odoo.com/app/project),
-[Billing &amp; Accounting](https://www.odoo.com/app/accounting),
+[Billing & Accounting](https://www.odoo.com/app/accounting),
 [Point of Sale](https://www.odoo.com/app/point-of-sale-shop),
 [Human Resources](https://www.odoo.com/app/employees),
 [Marketing](https://www.odoo.com/app/social-marketing),
 [Manufacturing](https://www.odoo.com/app/manufacturing),
 [...](https://www.odoo.com/)
 
-Odoo Apps can be used as stand-alone applications, but they also integrate seamlessly so you get
-a full-featured [Open Source ERP](https://www.odoo.com) when you install several Apps.
+Odoo Apps can be used as stand-alone applications, but they also integrate seamlessly so you get a full-featured [Open Source ERP](https://www.odoo.com) when you install several Apps.
 
-## Getting started with Odoo
+---
 
-For a standard installation please follow the [Setup instructions](https://www.odoo.com/documentation/master/administration/install/install.html)
-from the documentation.
+This repository contains **the full Odoo 18 source code**, **the custom modules** along with a **Docker Compose setup** for deployment.
 
-To learn the software, we recommend the [Odoo eLearning](https://www.odoo.com/slides),
-or [Scale-up, the business game](https://www.odoo.com/page/scale-up-business-game).
-Developers can start with [the developer tutorials](https://www.odoo.com/documentation/master/developer/howtos.html).
+### Included Modules
 
-## Security
+- **`property_management`**  
+  A module for managing properties, tenants, leases, and rent payments.
 
-If you believe you have found a security issue, check our [Responsible Disclosure page](https://www.odoo.com/security-report)
-for details and get in touch with us via email.
+- **`school_management`**  
+  A module for managing schools, students, classes, teachers, attendance, and reports.
+
+### Deployment Configuration
+
+- **`docker-compose.yaml`**  
+  Configuration for running Odoo in Docker containers.
+
+
+---
+
+## Deployment with Docker
+
+To clone and run this project:
+
+    # Clone the repo
+    git clone https://github.com/sewalewsetotaw/odoo18.git
+    cd odoo18
+
+    # Start Odoo in Docker
+    docker-compose up -d
+
+
+## Access Odoo
+
+Open your browser:
+
+👉 http://localhost:8088
+
+## Install Custom Modules
+
+Inside Odoo:
+
+- Enable **Developer Mode**
+
+- Go to **Apps** → **Update Apps List**
+
+- Search and install:
+
+       - property_management
+
+       - school_management
+
+## Using These Modules in an Existing Odoo Installation
+
+1. Copy the modules into your Odoo custom addons directory:
+
+        cp -r property_management /path/to/odoo/custom/addons/
+        cp -r school_management /path/to/odoo/custom/addons/
+
+2. Then in Odoo:
+
+- Enable **Developer Mode**
+
+- Go to **Apps** → **Update Apps List**
+
+- Search and install:
+
+       - property_management
+
+       - school_management
