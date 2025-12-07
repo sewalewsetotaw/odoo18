@@ -2,59 +2,49 @@ services:
 
   odoo:
     image: odoo:18
+    container_name: odoo18-odoo-1
     depends_on:
-        - db
+      - db
 
-    # Port Mapping
-    # --------
-    #
-    # Here we are mapping a port on the host machine (on the left)
-    # to a port inside of the container (on the right.) The default
-    # port on Odoo is 8069, so Odoo is running on that port inside
-    # of the container. But we are going to access it locally on
-    # our machine from localhost:9000.
+    # Port mapping: access Odoo locally at localhost:8088
     ports:
-      - 8088:8069
+      - "8088:8069"
 
-    # Data Volumes
-    # --------
-
-    # This defines files that we are mapping from the host machine
-    # into the container.
-
+    # Data volumes
     volumes:
-      -  odoo-web-data:/var/lib/odoo
+      - odoo-web-data:/var/lib/odoo
       - ./odoo.conf:/etc/odoo/odoo.conf
       - ./addons:/mnt/extra-addons
       - ./custom:/mnt/custom-addons
       - ./logs:/var/log/odoo
 
-    # Odoo Environment Variables
-
+    # Odoo environment variables
     environment:
-      - HOST=db
-      - USER=admin
-      - PASSWORD=odoo
-
-  # Database Container Service Definition
-  # --------
+      HOST: db
+      USER: admin
+      PASSWORD: odoo
+      DB_PORT: 5432
+      ADMIN_PASSWD: odoo
 
   db:
     image: postgres:14
+    container_name: odoo18-db-1
 
+    # Port mapping: access PostgreSQL locally at localhost:5430
     ports:
-        - 5430:5432
+      - "5430:5432"
 
-    # Database Environment Variables
-    # --------
-    # Make sure that they are the same as the database user
-    # defined in the web container environment variables.
+    # Database environment variables
     environment:
-      - POSTGRES_PASSWORD=odoo
-      - POSTGRES_USER=admin
-      - POSTGRES_DB=postgres  # Leave this set to postgres
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: odoo
+      POSTGRES_DB: postgres
+
+    # Data volumes
     volumes:
       - odoo-db-data:/var/lib/postgresql/data
+
+# Docker volumes
 volumes:
-    odoo-db-data:
-    odoo-web-data:
+  odoo-db-data:
+  odoo-web-data:
