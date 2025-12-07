@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Report Action -->
+    <record id="action_lease_summary_report" model="ir.actions.report">
+        <field name="name">Lease Summary Report</field>
+        <field name="model">lease.management</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">property_management.lease_summary_template</field>
+        <field name="report_file">property_management.lease_summary_template</field>
+        <field name="print_report_name">'Lease_Summary_Report'</field>
+    </record>
+
+    <template id="lease_summary_template">
+        <t t-name="property_management.lease_summary_template">
+            <t t-set="company" t-value="docs[0].company_id if docs and docs[0].company_id else env.company"/>
+            <html>
+                <body>
+                    <div class="header">
+                        <img t-if="company.logo" class="o_company_logo_small" t-att-src="image_data_uri(company.logo)"
+                             alt="Logo"/>
+                        <h1 t-esc="company.name" style="font-size:24px;"/>
+                        <p t-esc="company.city or ''" style="font-size:14px;"/>
+                        <p t-esc="company.phone or ''" style="font-size:14px;"/>
+                        <p t-esc="company.email or ''" style="font-size:14px;"/>
+                    </div>
+                    <main>
+                        <h2 style="text-align:center;">Lease Summary Report</h2>
+                        <table style="width:100%; border-collapse: collapse;" border="1">
+                            <thead>
+                                <tr>
+                                    <th>Tenant Name</th>
+                                    <th>Property Name</th>
+                                    <th>Lease Start Date</th>
+                                    <th>End Date</th>
+                                    <th>Monthly Rent</th>
+                                    <th>Months</th>
+                                    <th>Total Rent</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <t t-if="docs and len(docs) > 0">
+                                    <t t-foreach="docs" t-as="lease">
+                                        <tr>
+                                            <td>
+                                                <t t-esc="lease.tenant_id.name or ''"/>
+                                            </td>
+                                            <td>
+                                                <t t-esc="lease.property_id.name or ''"/>
+                                            </td>
+                                            <td>
+                                                <t t-esc="lease.start_date or ''"/>
+                                            </td>
+                                            <td>
+                                                <t t-esc="lease.end_date or ''"/>
+                                            </td>
+                                            <td>
+                                                <t t-esc="lease.monthly_rent or 0.0"/>
+                                            </td>
+                                            <td>
+                                                <t t-esc="lease.total_months or 0"/>
+                                            </td>
+                                            <td>
+                                                <t t-esc="lease.total_rent or 0.0"/>
+                                            </td>
+                                            <td>
+                                                <t t-esc="lease.state or ''"/>
+                                            </td>
+                                        </tr>
+                                    </t>
+                                </t>
+                                <t t-else="">
+                                    <tr>
+                                        <td colspan="8" style="text-align:center;">
+                                            No data found for the provided input.
+                                        </td>
+                                    </tr>
+                                </t>
+                            </tbody>
+                        </table>
+                    </main>
+                </body>
+            </html>
+        </t>
+    </template>
+
+</odoo>
+
+

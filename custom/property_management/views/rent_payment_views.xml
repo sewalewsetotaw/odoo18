@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_rent_payment_list" model="ir.ui.view">
+        <field name="name">rent.payment.list</field>
+        <field name="model">rent.payment</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="lease_id"/>
+                <field name="payment_date"/>
+                <field name="amount_paid" widget="monetary"/>
+                <field name="status"/>
+            </list>
+        </field>
+    </record>
+    <record id="view_rent_payment_form" model="ir.ui.view">
+        <field name="name">rent.payment.form</field>
+        <field name="model">rent.payment</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="action_payment" type="object" string="Pay" class="btn-primary"/>
+                    <field name="status" widget="statusbar"/>
+                </header>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="lease_id"/>
+                        <field name="payment_date"/>
+                        <field name="amount_paid" widget="monetary"/>
+                        <field name="note"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+</odoo>

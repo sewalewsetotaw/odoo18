@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <record id="tenant_management_data" model="ir.sequence">
+            <field name="name">Tenant Id</field>
+            <field name="code">tenant.management</field>
+            <field name="prefix">TEN/%(year)s</field>
+            <field name="padding">4</field>
+            <field name="number_next">1</field>
+            <field name="number_increment">1</field>
+        </record>
+
+    </data>
+</odoo>

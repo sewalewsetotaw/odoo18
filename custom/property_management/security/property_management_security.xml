@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="module_category_property" model="ir.module.category">
+        <field name="name">Property</field>
+        <field name="sequence">10</field>
+        <field name="visible">1</field>
+    </record>
+    <!--  User Groups  -->
+    <record id="group_property_manager" model="res.groups">
+        <field name="name">Property Manager</field>
+        <field name="category_id" ref="property_management.module_category_property"/>
+    </record>
+
+    <record id="group_property_accountant" model="res.groups">
+        <field name="name">Property Accountant</field>
+        <field name="category_id" ref="property_management.module_category_property"/>
+    </record>
+
+
+</odoo>
+
+

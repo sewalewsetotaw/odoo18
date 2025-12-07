@@ -1,0 +1,18 @@
+<odoo>
+    <record id="view_sale_order_form_inherit_lease" model="ir.ui.view">
+        <field name="name">sale.order.form.inherit.lease</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <!--  Insert into the notebook of the sale order  -->
+            <xpath expr="//sheet/notebook" position="inside">
+                <page string="Lease Agreement">
+                    <group>
+                        <field name="is_lease_agreement"/>
+                        <field name="lease_id"/>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>

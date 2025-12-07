@@ -1,0 +1,42 @@
+<odoo>
+    <data>
+        <record id="email_lease_expire" model="mail.template">
+            <field name="name">Lease Expire Soon</field>
+            <field name="model_id" ref="model_lease_management"/>
+            <field name="email_from">{{object.company_id.email}}</field>
+            <field name="subject">lease Expire Soon</field>
+            <field name="body_html" type="html">
+                <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; color: #333;">
+                    <!-- Header with Company Logo -->
+                    <div style="text-align: center; padding: 20px 0; border-bottom: 1px solid #eaeaea;">
+                        <t t-if="object.company_id.logo">
+                            <img t-att-src="'/web/image/res.company/%s/logo' % object.company_id.id"
+                                 style="max-height: 60px;"
+                                 t-att-alt="object.company_id.name"/>
+                        </t>
+                        <t t-if="not object.company_id.logo">
+                            <h2 style="color: #2c3e50; margin: 0;">
+                                <t t-esc="object.company_id.name"/>
+                            </h2>
+                        </t>
+                    </div>
+                    <!-- Email Content -->
+                    <div style="padding: 20px;">
+                        <p>Dear Team,</p>
+                        <p>The lease
+                            <strong t-esc="object.name"/>
+                            is expiring soon.
+                        </p>
+                        <p>The end date is
+                            <strong t-esc="object.end_date"/>
+
+                        </p>
+                        <p>Please take the necessary actions before the expiration date.</p>
+                        <p>Best regards,</p>
+                        <p t-esc="object.company_id.name"/>
+                    </div>
+                </div>
+            </field>
+        </record>
+    </data>
+</odoo>

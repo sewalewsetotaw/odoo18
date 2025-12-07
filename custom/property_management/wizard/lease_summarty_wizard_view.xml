@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="views_lease_summary_wizard_form" model="ir.ui.view">
+        <field name="name">lease.summary.wizard.form</field>
+        <field name="model">lease.summary.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Lease Summary Report">
+                <group>
+                    <field name="date_from"/>
+                    <field name="date_to"/>
+                    <field name="state"/>
+                </group>
+                <footer>
+                    <button name="action_print_report" type="object" string="Print PDF" class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+    <record id="action_lease_summary_wizard" model="ir.actions.act_window">
+        <field name="name">Lease Summary Report</field>
+        <field name="res_model">lease.summary.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+    <menuitem id="menu_lease_reports_root"
+              name="Lease Reports"
+              parent="menu_property_management_root"
+              sequence="50"/>
+
+    <menuitem id="menu_lease_reports_pdf"
+              name="Lease Reports PDF"
+              parent="menu_lease_reports_root"
+              sequence="1"
+              action="action_lease_summary_wizard"/>
+</odoo>

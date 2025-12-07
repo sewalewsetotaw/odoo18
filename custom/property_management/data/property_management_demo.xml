@@ -1,0 +1,120 @@
+<odoo>
+
+<!--         PROPERTY FEATURES-->
+
+    <record id="feature_furnished" model="property.feature">
+        <field name="name">Furnished</field>
+    </record>
+
+    <record id="feature_parking" model="property.feature">
+        <field name="name">Parking</field>
+    </record>
+
+    <record id="feature_wifi" model="property.feature">
+        <field name="name">High-Speed WiFi</field>
+    </record>
+
+    <record id="feature_security" model="property.feature">
+        <field name="name">24/7 Security</field>
+    </record>
+
+
+<!--         TENANTS-->
+
+    <record id="tenant_john" model="tenant.management">
+        <field name="name">Sewalew Setotaw</field>
+        <field name="email">sewalewsetotaw@gmail.com</field>
+        <field name="phone">+251911000001</field>
+    </record>
+
+    <record id="tenant_sara" model="tenant.management">
+        <field name="name">Sara Michael</field>
+        <field name="email">sara@example.com</field>
+        <field name="phone">+251911000002</field>
+    </record>
+
+
+<!--             PROPERTIES-->
+
+    <!-- Apartment -->
+    <record id="property_apartment_01" model="property.management">
+        <field name="name">Apartment A1</field>
+        <field name="property_type">apartment</field>
+        <field name="price_per_month">8500</field>
+        <field name="description">Located in Addis Ababa</field>
+        <field name="num_bedrooms">2</field>
+        <field name="status">available</field>
+        <field name="address">Addis Ababa, Bole</field>
+        <field name="year_built">2018</field>
+        <field name="area_sqft">1200</field>
+        <field name="feature_ids" eval="[(6,0,[ref('feature_furnished'), ref('feature_wifi')])]"/>
+    </record>
+
+    <!-- Villa -->
+    <record id="property_villa_01" model="property.management">
+        <field name="name">Luxury Villa V3</field>
+        <field name="property_type">villa</field>
+        <field name="price_per_month">25000</field>
+        <field name="description">Located in Bahir Dar</field>
+        <field name="num_bedrooms">4</field>
+        <field name="num_floors">2</field>
+        <field name="status">available</field>
+        <field name="address">Addis Ababa, CMC</field>
+        <field name="year_built">2020</field>
+        <field name="area_sqft">3500</field>
+        <field name="feature_ids" eval="[(6,0,[ref('feature_parking'), ref('feature_security')])]"/>
+    </record>
+
+    <!-- Office -->
+    <record id="property_office_01" model="property.management">
+        <field name="name">Office Space O-12B</field>
+        <field name="property_type">office</field>
+        <field name="price_per_month">18000</field>
+        <field name="description">Located in Addis Ababa</field>
+        <field name="num_bedrooms">0</field>
+        <field name="status">available</field>
+        <field name="address">Addis Ababa, Sar Bet</field>
+        <field name="area_sqft">900</field>
+    </record>
+
+
+<!--         LEASES-->
+
+
+    <record id="lease_john_apartment" model="lease.management">
+        <field name="tenant_id" ref="tenant_john"/>
+        <field name="property_id" ref="property_apartment_01"/>
+        <field name="start_date">2025-01-01</field>
+        <field name="end_date">2025-12-31</field>
+        <field name="monthly_rent">8500</field>
+        <field name="state">active</field>
+    </record>
+
+    <record id="lease_sara_villa" model="lease.management">
+        <field name="tenant_id" ref="tenant_sara"/>
+        <field name="property_id" ref="property_villa_01"/>
+        <field name="start_date">2025-03-01</field>
+        <field name="end_date">2026-02-28</field>
+        <field name="monthly_rent">25000</field>
+        <field name="state">active</field>
+    </record>
+
+
+<!--         RENT PAYMENTS-->
+
+
+    <record id="payment_john_jan" model="rent.payment">
+        <field name="lease_id" ref="lease_john_apartment"/>
+        <field name="payment_date">2025-01-05</field>
+        <field name="amount_paid">8500</field>
+        <field name="status">paid</field>
+    </record>
+
+    <record id="payment_sara_mar" model="rent.payment">
+        <field name="lease_id" ref="lease_sara_villa"/>
+        <field name="payment_date">2025-03-05</field>
+        <field name="amount_paid">25000</field>
+        <field name="status">paid</field>
+    </record>
+
+</odoo>

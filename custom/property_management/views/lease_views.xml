@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_lease_list" model="ir.ui.view">
+        <field name="name">lease.list</field>
+        <field name="model">lease.management</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="tenant_id"/>
+                <field name="property_id"/>
+                <field name="start_date"/>
+                <field name="end_date"/>
+                <field name="monthly_rent" widget="monetary"/>
+                <field name="state"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_lease_form" model="ir.ui.view">
+        <field name="name">lease.form</field>
+        <field name="model">lease.management</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="action_active" type="object" string="Activate" class="oe_highlight"
+                            groups="property_management.group_property_manager"/>
+                    <button name="action_expired" type="object" string="Mark as Expired" class="oe_highlight"
+                            groups="property_management.group_property_manager"/>
+                    <field name="state" widget="statusbar"/>
+                </header>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="tenant_id"/>
+                        <field name="property_id"/>
+                        <field name="start_date"/>
+                        <field name="end_date"/>
+                        <field name="monthly_rent" widget="monetary"/>
+                    </group>
+                    <notebook>
+                        <page string="Payments">
+                            <field name="payment_ids" widget="one2many_list"/>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+
+
+</odoo>

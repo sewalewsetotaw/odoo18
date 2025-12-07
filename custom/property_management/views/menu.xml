@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="action_property" model="ir.actions.act_window">
+        <field name="name">Properties</field>
+        <field name="res_model">property.management</field>
+        <field name="view_mode">list,form,kanban,search</field>
+    </record>
+    <record id="action_tenant" model="ir.actions.act_window">
+        <field name="name">Tenants</field>
+        <field name="res_model">tenant.management</field>
+        <field name="view_mode">list,form</field>
+    </record>
+    <record id="action_lease" model="ir.actions.act_window">
+        <field name="name">Leases</field>
+        <field name="res_model">lease.management</field>
+        <field name="view_mode">list,form,kanban,graph</field>
+    </record>
+    <record id="action_rent_payment" model="ir.actions.act_window">
+        <field name="name">Rent Payments</field>
+        <field name="res_model">rent.payment</field>
+        <field name="view_mode">list,form</field>
+    </record>
+    <record id="action_tenant_leads" model="ir.actions.act_window">
+        <field name="name">Tenant Leads</field>
+        <field name="res_model">crm.lead</field>
+        <field name="view_mode">list,form</field>
+        <field name="domain">[('is_tenant_lead', '=', True)]</field>
+        <field name="context">{'default_is_tenant_lead': True}</field>
+    </record>
+
+    <menuitem id="menu_property_management" name="Tenant Leads" sequence="2"
+              action="action_tenant_leads"
+              parent="crm.crm_menu_root"/>
+
+    <menuitem id="menu_property_management_root" name="Property Management" sequence="10"/>
+    <menuitem id="menu_properties" name="Properties" parent="menu_property_management_root" action="action_property"
+              sequence="10"/>
+    <menuitem id="menu_tenants" name="Tenants" parent="menu_property_management_root" action="action_tenant"
+              sequence="20"/>
+    <menuitem id="menu_leases" name="Leases" parent="menu_property_management_root" action="action_lease"
+              sequence="30"/>
+    <menuitem id="menu_rent_payments" name="Rent Payments" parent="menu_property_management_root"
+              action="action_rent_payment" sequence="40"/>
+
+
+</odoo>

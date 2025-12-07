@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_property_crm_lead_form_inherit" model="ir.ui.view">
+        <field name="name">crm.lead.form.inherit.property</field>
+        <field name="model">crm.lead</field>
+        <field name="inherit_id" ref="crm.crm_lead_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='tag_ids']" position="before">
+                <field name="is_tenant_lead"/>
+                <field name="property_id"/>
+                <field name="budget"/>
+            </xpath>
+        </field>
+    </record>
+    <record id="view_property_crm_lead_list_inherit" model="ir.ui.view">
+        <field name="name">crm.lead.list.inherit.property</field>
+        <field name="model">crm.lead</field>
+        <field name="inherit_id" ref="crm.crm_case_tree_view_oppor"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='email_from']" position="after">
+                <field name="property_id"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

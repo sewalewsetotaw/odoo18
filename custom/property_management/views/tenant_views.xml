@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_tenant_list" model="ir.ui.view">
+        <field name="name">tenant.list</field>
+        <field name="model">tenant.management</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="email"/>
+                <field name="phone"/>
+                <field name="id_number"/>
+            </list>
+        </field>
+    </record>
+    <record id="view_tenant_form" model="ir.ui.view">
+        <field name="name">tenant.form</field>
+        <field name="model">tenant.management</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="email"/>
+                        <field name="phone"/>
+                        <field name="id_number"/>
+                    </group>
+                    <notebook>
+                        <page string="leases">
+                            <field name="lease_ids" widget="one2many_list"/>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+</odoo>

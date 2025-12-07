@@ -25,13 +25,12 @@ Odoo Apps can be used as stand-alone applications, but they also integrate seaml
 
 This repository contains **the full Odoo 18 source code**, **the custom modules** along with a **Docker Compose setup** for deployment.
 
-### Included Modules
+### Custom Modules
 
 - **`property_management`**  
-  A module for managing properties, tenants, leases, and rent payments.
-
+    A module for managing properties, tenants, leases, rent payments, QWEB reports, and providing an API for third-party integration
 - **`school_management`**  
-  A module for managing schools, students, classes, teachers, attendance, and reports.
+    A module for managing schools, students, classes, teachers, attendance, QWEB reports, and a dashboard implemented using OWL
 
 ### Deployment Configuration
 
