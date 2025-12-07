@@ -1,0 +1,15 @@
+<odoo>
+    <template inherit_id="web.assets_backend" id="school_management_assets_backend">
+        <xpath expr="." position="inside">
+
+            <!-- Load dashboard JS -->
+            <script type="module" src="/school_management/static/src/js/school_dashboard.js"></script>
+
+            <!-- Load dashboard QWeb -->
+            <template id="school_management_dashboard_templates" xml:space="preserve">
+                <t t-call="school_management.SchoolDashboard"/>
+            </template>
+
+        </xpath>
+    </template>
+</odoo>

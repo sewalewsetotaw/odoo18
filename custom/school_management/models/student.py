@@ -44,12 +44,21 @@ class Student(models.Model):
             'domain': [('student_id', '=', self.id)],
             'context': {'default_student_id': self.id}
         }
-    @api.model
-    def create(self, vals):
-        if not vals.get('admission_no') or vals.get('admission_no') == 'New':
-            vals['admission_no'] = self.env['ir.sequence'].next_by_code('student.management') or 'New'
-        return super(Student, self).create(vals)
+    @api.model_create_multi
+    def create(self, vals_list):
+        students = super().create(vals_list)
 
+        for student, vals in zip(students, vals_list):
+
+            # Generate admission number
+            if vals.get('admission_no') in (False, 'New'):
+                student.admission_no = self.env['ir.sequence'].next_by_code('student.management')
+
+            # Assign parents properly
+            if vals.get('parent_ids'):
+                student.parent_ids = vals.get('parent_ids')
+
+        return students
     @api.depends('date_of_birth')
     def _compute_age(self):
         today = date.today()

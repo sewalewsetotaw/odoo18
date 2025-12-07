@@ -16,21 +16,20 @@ class Parent(models.Model):
     partner_id = fields.Many2one('res.partner', string="Linked Partner", ondelete="cascade")
     students = fields.Many2many('student.management',string="Children")
 
-    @api.model
-    def create(self, vals):
-        guardian = super().create(vals)
-
-        # Auto-create partner if not linked
-        if not guardian.partner_id:
-            partner = self.env['res.partner'].create({
-                'name': guardian.name,
-                'phone': guardian.phone_number,
-                'email': guardian.email,
-                'type': 'contact',
-            })
-            guardian.partner_id = partner.id
-
-        return guardian
+    @api.model_create_multi
+    def create(self, vals_list):
+        guardians = super().create(vals_list)
+        for guardian in guardians:
+            # Auto-create partner if not linked
+            if not guardian.partner_id:
+                partner = self.env['res.partner'].create({
+                    'name': guardian.name,
+                    'phone': guardian.phone_number,
+                    'email': guardian.email,
+                    'type': 'contact',
+                })
+                guardian.partner_id = partner.id
+        return guardians
 
     def write(self, vals):
         res = super().write(vals)

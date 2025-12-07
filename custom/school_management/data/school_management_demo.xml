@@ -1,0 +1,109 @@
+<odoo>
+    <data>
+                <!-- Academic Years -->
+
+        <record id="academic_year_2018_2019" model="academic.year">
+            <field name="name">2018-2019</field>
+            <field name="start_date">2018-01-01</field>
+            <field name="end_date">2019-12-31</field>
+            <field name="state">closed</field>
+        </record>
+
+        <record id="academic_year_2019_2020" model="academic.year">
+            <field name="name">2019-2020</field>
+            <field name="start_date">2019-01-01</field>
+            <field name="end_date">2020-12-31</field>
+            <field name="state">closed</field>
+        </record>
+
+        <record id="academic_year_2025_2025" model="academic.year">
+            <field name="name">2025-2026</field>
+            <field name="start_date">2025-01-01</field>
+            <field name="end_date">2026-12-31</field>
+            <field name="state">active</field>
+        </record>
+
+        <!--  Teachers / Employees -->
+
+        <record id="teacher_1" model="hr.employee">
+            <field name="name">Alice Johnson</field>
+            <field name="is_teacher">True</field>
+            <field name="qualification">M.Sc. in Mathematics</field>
+            <field name="joining_date">2021-09-01</field>
+        </record>
+
+        <record id="teacher_2" model="hr.employee">
+            <field name="name">Bob Smith</field>
+            <field name="is_teacher">True</field>
+            <field name="qualification">B.Ed in English</field>
+            <field name="joining_date">2022-01-15</field>
+        </record>
+
+        <!--  Courses -->
+
+        <record id="course_1" model="course.management">
+            <field name="name">Mathematics</field>
+            <field name="code">MATH101</field>
+            <field name="description">Basic Mathematics course</field>
+            <field name="teacher_ids" eval="[(4, ref('teacher_1'))]"/>
+        </record>
+
+        <record id="course_2" model="course.management">
+            <field name="name">English Literature</field>
+            <field name="code">ENG201</field>
+            <field name="description">English Language and Literature</field>
+            <field name="teacher_ids" eval="[(4, ref('teacher_2'))]"/>
+        </record>
+
+        <!--   Sections -->
+        <record id="section_1" model="section.management">
+            <field name="name">Grade 10 - A</field>
+            <field name="academic_year_id" ref="academic_year_2018_2019"/>
+            <field name="course_ids" eval="[(4, ref('course_1')), (4, ref('course_2'))]"/>
+            <field name="teacher_ids" eval="[(4, ref('teacher_1')), (4, ref('teacher_2'))]"/>
+        </record>
+
+        <record id="section_2" model="section.management">
+            <field name="name">Grade 10 - B</field>
+            <field name="academic_year_id" ref="academic_year_2018_2019"/>
+            <field name="course_ids" eval="[(4, ref('course_1'))]"/>
+            <field name="teacher_ids" eval="[(4, ref('teacher_1'))]"/>
+        </record>
+
+        <!--   Parents / Guardians -->
+        <record id="parent_1" model="parent.management">
+            <field name="name">Michael Doe</field>
+            <field name="phone_number">+251911000111</field>
+            <field name="email">michael.doe@example.com</field>
+            <field name="relation">father</field>
+        </record>
+
+        <record id="parent_2" model="parent.management">
+            <field name="name">Sarah Jane</field>
+            <field name="phone_number">+251911000222</field>
+            <field name="email">sarah.jane@example.com</field>
+            <field name="relation">mother</field>
+        </record>
+
+        <!--   Students -->
+        <record id="student_1" model="student.management">
+            <field name="name">John Doe</field>
+            <field name="date_of_birth">2008-05-12</field>
+            <field name="gender">male</field>
+            <field name="join_date">2023-09-01</field>
+            <field name="section_id" ref="section_1"/>
+            <field name="course_id" eval="[(4, ref('course_1'))]"/>
+            <field name="parent_ids" eval="[(4, ref('parent_1')), (4, ref('parent_2'))]"/>
+        </record>
+
+        <record id="student_2" model="student.management">
+            <field name="name">Mary Jane</field>
+            <field name="date_of_birth">2009-03-20</field>
+            <field name="gender">female</field>
+            <field name="join_date">2023-09-01</field>
+            <field name="section_id" ref="section_1"/>
+            <field name="course_id" eval="[(4, ref('course_2'))]"/>
+            <field name="parent_ids" eval="[(4, ref('parent_2'))]"/>
+        </record>
+    </data>
+</odoo>

@@ -8,6 +8,5 @@ class Course(models.Model):
     code = fields.Char(string="Code", required=True)
     description = fields.Text(string="Description")
     student_ids=fields.Many2many('student.management',string="Students")
-    # teacher_ids=fields.Many2many('teacher.management',string="Teachers")
     teacher_ids=fields.Many2many('hr.employee',string="Assigned Teachers",domain=[('is_teacher','=',True)])
     section_ids=fields.Many2many('section.management',string="Sections")

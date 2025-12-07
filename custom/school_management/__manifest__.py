@@ -40,6 +40,7 @@ This module provides a complete solution for managing school operations, includi
         'views/enrollment_views.xml',
         'views/fee_structure_views.xml',
         'views/school_dashboard_action.xml',
+        'views/assets.xml',
 
         'report/attendance_summary_template.xml',
 
@@ -49,6 +50,7 @@ This module provides a complete solution for managing school operations, includi
         'data/student_admission_seq.xml',
         'data/email_cron.xml',
         'data/email_template.xml',
+        'data/school_management_demo.xml',
     ],
     'assets': {
         'web.assets_backend': [
