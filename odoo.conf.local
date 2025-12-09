@@ -4,7 +4,7 @@
 # Path to your custom and community addons for local Odoo.
 # Absolute Windows path is required.
 # ---------------------------------------------------------
-addons_path = C:\odoo_dev\odoo18\addons
+addons_path = C:\odoo_dev\odoo18\addons,C:\odoo_dev\odoo18\custom
 
 # ---------------------------------------------------------
 # Database connection settings for local PostgreSQL.
