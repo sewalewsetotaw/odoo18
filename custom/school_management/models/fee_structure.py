@@ -21,11 +21,11 @@ class FeeStructure(models.Model):
         store=True,
         readonly=True
     )
-    income_account_id = fields.Many2one(
-        'account.account',
-        string="Income Account",
-        domain="[('account_type', '=', 'income')]",
-        # domain="[('internal_group', '=', 'income')]",
-        required=True,
-        help="Select the income account where this fee will be posted."
-    )
+    # income_account_id = fields.Many2one(
+    #     'account.account',
+    #     string="Income Account",
+    #     domain="[('account_type', '=', 'income')]",
+    #     # domain="[('internal_group', '=', 'income')]",
+    #     required=True,
+    #     help="Select the income account where this fee will be posted."
+    # )

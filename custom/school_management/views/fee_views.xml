@@ -31,20 +31,20 @@
         <field name="arch" type="xml">
             <form string="Fees">
                 <sheet>
-                    <div name="button_box" class="oe_button_box">
-                        <button name="action_view_invoice"
-                                class="btn-primary"
-                                icon="fa-file-invoice"
-                                type="object"
-                                help="View Invoice">
-                            <field name="invoice_id" string="Invoice" widget="statinfo"/>
-                        </button>
-                    </div>
+<!--                    <div name="button_box" class="oe_button_box">-->
+<!--                        <button name="action_view_invoice"-->
+<!--                                class="btn-primary"-->
+<!--                                icon="fa-file-invoice"-->
+<!--                                type="object"-->
+<!--                                help="View Invoice">-->
+<!--                            <field name="invoice_id" string="Invoice" widget="statinfo"/>-->
+<!--                        </button>-->
+<!--                    </div>-->
                     <header>
-                        <button name="action_create_invoice" type="object"
-                                string="Generate Invoice"
-                                class="btn-primary"
-                                groups="account.group_account_invoice" invisible="invoice_id!=False"/>
+<!--                        <button name="action_create_invoice" type="object"-->
+<!--                                string="Generate Invoice"-->
+<!--                                class="btn-primary"-->
+<!--                                groups="account.group_account_invoice" invisible="invoice_id!=False"/>-->
 
                         <field name="state" widget="statusbar" options="{'clickable': false}"/>
                         <!--                        <button name="action_set_paid" type="object" string="Mark as Paid"-->

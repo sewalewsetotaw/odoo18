@@ -9,7 +9,7 @@
                 <field name="code"/>
                 <field name="currency_id" invisible="1"/>
                 <field name="amount" widget="monetary" options="{'currency_field': 'currency_id'}"/>
-                <field name="income_account_id"/>
+<!--                <field name="income_account_id"/>-->
             </list>
         </field>
     </record>
@@ -24,7 +24,7 @@
                         <field name="code"/>
                         <field name="currency_id" invisible="1"/>
                         <field name="amount" widget="monetary" options="{'currency_field': 'currency_id'}"/>
-                        <field name="income_account_id" />
+<!--                        <field name="income_account_id" />-->
                     </group>
                 </sheet>
             </form>

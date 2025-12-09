@@ -50,9 +50,9 @@ class Fees(models.Model):
     half_scholarship = fields.Boolean(string="Half Scholarship")
     full_scholarship = fields.Boolean(string="Full Scholarship")
 
-    invoice_id = fields.Many2one('account.move', string="Invoice", readonly=True)
-    payment_ids = fields.One2many('account.payment', 'fee_id', string="Payments")
-    invoice_state = fields.Selection(related='invoice_id.state', string="Invoice Status", readonly=True)
+    # invoice_id = fields.Many2one('account.move', string="Invoice", readonly=True)
+    # payment_ids = fields.One2many('account.payment', 'fee_id', string="Payments")
+    # invoice_state = fields.Selection(related='invoice_id.state', string="Invoice Status", readonly=True)
 
     @api.depends("student_id.name", "reference_number")
     def _compute_payment_reference(self):
@@ -126,77 +126,77 @@ class Fees(models.Model):
 
     def action_reset_draft(self):
         self.write({'state': 'draft'})
+    #
+    # def action_create_invoice(self):
+    #     for rec in self:
+    #         if not rec.fee_structure_id:
+    #             raise ValidationError("Please select a Fee Structure before creating an invoice.")
+    #
+    #         # pick first linked parent with partner
+    #         guardian = rec.student_id.parent_ids[:1]  # Take first parent
+    #         if not guardian or not guardian.partner_id:
+    #             raise ValidationError("The student has no guardian linked to a Partner for invoicing.")
+    #
+    #         # --- get income account ---
+    #         account_id = rec.fee_structure_id.income_account_id.id
+    #         if not account_id:
+    #             account_id = rec.company_id.account_income_id.id
+    #         _logger.info("Creating invoice line with account_id=%s for fee=%s", account_id, rec.payment_reference)
+    #
+    #         # Ensure there is a Product to use for invoicing
+    #         school_fee_product = self.env['product.product'].search([('name', '=', 'School Fee')], limit=1)
+    #         if not school_fee_product:
+    #             school_fee_product = self.env['product.product'].create({
+    #                 'name': 'School Fee',
+    #                 'type': 'service',
+    #                 'sale_ok': True,
+    #                 'purchase_ok': False,
+    #                 'invoice_policy': 'order',
+    #             })
+    #         if not account_id:
+    #             raise ValidationError(
+    #                 "No Income Account found. Please configure one in the Fee Structure or Company settings.")
+    #
+    #         move = self.env['account.move'].create({
+    #             'move_type': 'out_invoice',
+    #             'partner_id': guardian.partner_id.id,
+    #             'invoice_date': fields.Date.context_today(self),
+    #             'currency_id': rec.currency_id.id,
+    #             'invoice_line_ids': [(0, 0, {
+    #                 'name': rec.fee_structure_id.name,
+    #                 'quantity': 1,
+    #                 'price_unit': rec.total_amount,
+    #                 'currency_id': rec.currency_id.id,
+    #                 'account_id': account_id,
+    #                 'product_id': school_fee_product.id,
+    #                 'product_uom_id': school_fee_product.uom_id.id,
+    #             })]
+    #         })
+    #
+    #         rec.invoice_id = move.id
+    #         rec.reference_number = move.name
+    #         rec.message_post(body=f"Invoice {move.name} created for this fee.")
+    #
+    #         return {
+    #             'type': 'ir.actions.act_window',
+    #             'res_model': 'account.move',
+    #             'view_mode': 'form',
+    #             'res_id': move.id,
+    #         }
+    #
+    # def action_view_invoice(self):
+    #     self.ensure_one()
+    #     if not self.invoice_id:
+    #         raise ValidationError("No invoice linked to this fee.")
+    #     return {
+    #         'type': 'ir.actions.act_window',
+    #         'res_model': 'account.move',
+    #         'view_mode': 'form',
+    #         'res_id': self.invoice_id.id,
+    #         'target': 'current',
+    #     }
 
-    def action_create_invoice(self):
-        for rec in self:
-            if not rec.fee_structure_id:
-                raise ValidationError("Please select a Fee Structure before creating an invoice.")
-
-            # pick first linked parent with partner
-            guardian = rec.student_id.parent_ids[:1]  # Take first parent
-            if not guardian or not guardian.partner_id:
-                raise ValidationError("The student has no guardian linked to a Partner for invoicing.")
-
-            # --- get income account ---
-            account_id = rec.fee_structure_id.income_account_id.id
-            if not account_id:
-                account_id = rec.company_id.account_income_id.id
-            _logger.info("Creating invoice line with account_id=%s for fee=%s", account_id, rec.payment_reference)
-
-            # Ensure there is a Product to use for invoicing
-            school_fee_product = self.env['product.product'].search([('name', '=', 'School Fee')], limit=1)
-            if not school_fee_product:
-                school_fee_product = self.env['product.product'].create({
-                    'name': 'School Fee',
-                    'type': 'service',
-                    'sale_ok': True,
-                    'purchase_ok': False,
-                    'invoice_policy': 'order',
-                })
-            if not account_id:
-                raise ValidationError(
-                    "No Income Account found. Please configure one in the Fee Structure or Company settings.")
-
-            move = self.env['account.move'].create({
-                'move_type': 'out_invoice',
-                'partner_id': guardian.partner_id.id,
-                'invoice_date': fields.Date.context_today(self),
-                'currency_id': rec.currency_id.id,
-                'invoice_line_ids': [(0, 0, {
-                    'name': rec.fee_structure_id.name,
-                    'quantity': 1,
-                    'price_unit': rec.total_amount,
-                    'currency_id': rec.currency_id.id,
-                    'account_id': account_id,
-                    'product_id': school_fee_product.id,
-                    'product_uom_id': school_fee_product.uom_id.id,
-                })]
-            })
-
-            rec.invoice_id = move.id
-            rec.reference_number = move.name
-            rec.message_post(body=f"Invoice {move.name} created for this fee.")
-
-            return {
-                'type': 'ir.actions.act_window',
-                'res_model': 'account.move',
-                'view_mode': 'form',
-                'res_id': move.id,
-            }
-
-    def action_view_invoice(self):
-        self.ensure_one()
-        if not self.invoice_id:
-            raise ValidationError("No invoice linked to this fee.")
-        return {
-            'type': 'ir.actions.act_window',
-            'res_model': 'account.move',
-            'view_mode': 'form',
-            'res_id': self.invoice_id.id,
-            'target': 'current',
-        }
-
-    class AccountPayment(models.Model):
-        _inherit = 'account.payment'
-
-        fee_id = fields.Many2one('fees.fees', string="Related Fee")
+    # class AccountPayment(models.Model):
+    #     _inherit = 'account.payment'
+    #
+    #     fee_id = fields.Many2one('fees.fees', string="Related Fee")
